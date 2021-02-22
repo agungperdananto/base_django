@@ -1,0 +1,13 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+{% block content %}
+<div class="container">
+  <h1>Title: {{ product.id }}</h1>
+  <p><strong>Product name:</strong>{{ product.name }}</p>
+  <p><strong>Product description:</strong> {{ product.description }}</p>
+  <p><strong>Values:</strong> {{ product.values }}</p>
+</div>
+{% endblock %}
