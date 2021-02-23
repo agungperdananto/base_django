@@ -15,7 +15,7 @@
         <tbody>
           {% for product in products %}
             <tr>
-              <td><a href="{% url 'product-detail' product.pk %}">{{ product.name }}</a></td>
+              <td><a href="{% url 'pattern_data:product-detail' product.pk %}">{{ product.name }}</a></td>
               <td>{{ product.description }}</td>
               <td>{{ product.values }}</td>
             </tr>
