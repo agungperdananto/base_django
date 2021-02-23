@@ -4,10 +4,10 @@ from django.views.generic import DetailView, ListView
 from .models import Product
 
 
-class ProductList(ListView):
+class ProductListView(ListView):
     model = Product
-    context_object_name = 'users'  # Default: object_list
-    paginate_by = 10
+    context_object_name = 'products'  # Default: object_list
+    paginate_by = 2
     # queryset = Product.objects.all()  # Default: Model.objects.all()
 
 
