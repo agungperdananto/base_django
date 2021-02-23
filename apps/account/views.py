@@ -1,7 +1,8 @@
 from django import forms
-from django.shortcuts import redirect, render
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import UserCreationForm
+from django.shortcuts import redirect, render
+
 
 User = get_user_model()
 
@@ -19,7 +20,7 @@ def signup_view(request):
         form = SignUpForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('pattern_data:product-list')
+            return redirect('pattern_data:signup')
     else:
         form = SignUpForm()
     return render(request, 'account/signup.html', {'form': form})
