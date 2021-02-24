@@ -3,6 +3,7 @@ from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill, ResizeToFit
 from mptt.models import MPTTModel, TreeForeignKey
 
+from utils.generics import clean_str
 from utils.models import BaseModel
 from .helpers import get_brand_upload_path, get_category_upload_path, get_product_upload_path
 
@@ -151,8 +152,30 @@ class Product(BaseModel):
 
     def __str__(self):
         return self.name
-    
+
     def save(self, *args, **kwargs):
         # Clean and generate internal codes
         self.slug = clean_str(self.slug, lower=True)
         super().save(*args, **kwargs)
+
+
+class ProductImage(models.Model):
+    product = models.ForeignKey(
+        'Product',
+        related_name='images',
+        on_delete=models.CASCADE)
+    image = models.ImageField(upload_to=get_product_upload_path)
+    thumb_sm = ImageSpecField(
+        source='image',
+        processors=[ResizeToFill(250, 250)],
+        format='JPEG',
+        options={'quality': 70})
+    thumb_lg = ImageSpecField(
+        source='image',
+        processors=[ResizeToFill(750, 750)],
+        format='JPEG',
+        options={'quality': 70})
+    sort = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ('sort',)
